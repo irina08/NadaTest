@@ -1,8 +1,10 @@
 package com.pages;
 
 import com.Base;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 
 public class HomePage extends Base
@@ -28,6 +30,28 @@ public class HomePage extends Base
 
     @FindBy(xpath = "//p[@class='p-3']")
     private WebElement confirmationText;
+
+    // constructor
+    public HomePage(WebDriver driver)
+    {
+        this.driver = driver;
+    }
+
+    public static HomePage open(WebDriver driver)
+    {
+        driver.get(URL);
+        driver.manage().window().maximize();
+        return PageFactory.initElements(driver, HomePage.class);
+    }
+
+    public String expectedTitle() {
+        return title;
+    }
+
+    public String userEmail() {
+        clickElement(addInboxe);
+        return userName.getAttribute("value") + domainName;
+    }
 
 
 }
