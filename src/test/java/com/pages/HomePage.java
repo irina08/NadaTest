@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 
 public class HomePage extends Base
@@ -53,5 +54,14 @@ public class HomePage extends Base
         return userName.getAttribute("value") + domainName;
     }
 
+    public void createEmail() {
+        Select s = new Select(dropDownDomainName);
+        s.selectByVisibleText(domainName);
+        generate_email.click();
+    }
+
+    public String getConfirmationText() {
+        return confirmationText.getText();
+    }
 
 }
