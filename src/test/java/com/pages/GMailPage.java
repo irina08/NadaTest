@@ -42,7 +42,21 @@ public class GMailPage extends Base {
         return PageFactory.initElements(driver, GMailPage.class);
     }
 
+    public void gmailLogin() {
+        email.clear();
+        email.sendKeys(gmailUserName);
+        buttonNext1.click();
 
+        waitElementToBeVisible(password);
+        password.clear();
+        password.sendKeys(gmailPassword);
+        buttonNext2.click();
+        waitElementToBeVisible(createNewEmailButton);
+    }
 
+    public void createNewEmail() {
+        createNewEmailButton.click();
+
+    }
 
 }
