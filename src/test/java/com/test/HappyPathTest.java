@@ -1,12 +1,14 @@
 package com.test;
 
+import com.pages.GMailPage;
+import com.pages.HomePage;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class HappyPathTest {
@@ -29,6 +31,25 @@ class HappyPathTest {
     {
         driver = new ChromeDriver();
     }
+
+    @Order(1)
+    @Test
+    void test1() {
+        HomePage homePage = HomePage.open(driver);
+        assertEquals(homePage.expectedTitle(), driver.getTitle());
+
+        userEmail = homePage.userEmail();
+
+        //System.out.println(userEmail);
+
+        homePage.createEmail();
+
+        //System.out.println(homePage.getConfirmationText());
+        assertTrue(homePage.getConfirmationText().contains(userEmail));
+
+    }
+
+
 
 
 	/*
